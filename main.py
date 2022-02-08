@@ -1,15 +1,27 @@
 # retrieve the latest news from radiology website (auntminnie.com)
-def resultdata():
-    pass
+import re
+
+from bs4 import BeautifulSoup
+import requests
+
+content = 'https://www.auntminnie.com/'
+
+try:
+    a = requests.get(content)
+    if a.status_code == 200:
+        print('OK')
+
+except Exception:
+    print('error')
 
 
-def showdata(result):
-    pass
+soup = BeautifulSoup(a.text, 'html.parser')
 
+print(soup.find('title').string)
 
-if __name__ == '__main__':
-    print('main apps')
-    result = resultdata()
-    showdata(result)
+print('This is the recent news:')
+radnews = soup.find_all('span', attrs={'class': 'Head'})
+for i in radnews:
+    print(i.get_text())
 
 
