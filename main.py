@@ -2,24 +2,46 @@
 from bs4 import BeautifulSoup
 import requests
 
-content = 'https://www.auntminnie.com/'
 
-try:
-    a = requests.get(content)
-    if a.status_code == 200:
-        print('Accessable')
+class Dashboard:
+    def __init__(self, url):
+        self.request = requests.get(url)
 
-except Exception:
-    print('error')
+    def test(self):
+        try:
+            if self.request.status_code == 200:
+                soup = BeautifulSoup(self.request.text, 'html.parser')
+                print(f"{soup.find('title').string} is accsesable")
+        except Exception:
+            print("Can't accses web")
+
+    def data(self):
+        pass
+
+    def run(self):
+        self.test()
+        self.data()
 
 
-soup = BeautifulSoup(a.text, 'html.parser')
+class RecentNews(Dashboard):
+    def data(self):
+        print('This is the recent news:')
 
-print(soup.find('title').string)
-
-print('This is the recent news:')
-news = soup.find_all('span', attrs={'class': 'Head'})
-for i in news:
-    print(i.get_text())
+        soup = BeautifulSoup(self.request.text, 'html.parser')
+        news = soup.find_all('span', attrs={'class': 'Head'})
+        for i in news:
+            print(i.get_text())
 
 
+class Conferences(Dashboard):
+    def data(self):
+        print('This is the recent Radiology Conferences:')
+
+        soup = BeautifulSoup(self.request.text, 'html.parser')
+        con = soup.find('div', attrs={'class': 'supBoxLoopCtrl'})
+        con = con.findChildren('a')
+        for i in con:
+            print(i.text)
+
+
+link = 'https://www.auntminnie.com/'
