@@ -3,9 +3,19 @@ from bs4 import BeautifulSoup
 import requests
 
 
+def info():
+    print('how to use this package:')
+    print('package News for the recent news in auntminnie')
+    print('package conferences for the recent conferences radiology in auntminnie')
+    print('.test for testing the web')
+    print('.data for take a data from web')
+    print('.run for run .test and .data')
+
+
 class Dashboard:
     def __init__(self, url):
         self.request = requests.get(url)
+        print('This the package for retrive last news and conferences about radiology')
 
     def test(self):
         try:
@@ -23,7 +33,7 @@ class Dashboard:
         self.data()
 
 
-class RecentNews(Dashboard):
+class News(Dashboard):
     def data(self):
         print('This is the recent news:')
 
