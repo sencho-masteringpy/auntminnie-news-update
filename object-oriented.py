@@ -27,10 +27,6 @@ class Dashboard:
 
 
 class News(Dashboard):
-    def __init__(self, url, description):
-        description = print('you use news package')
-        super().__init__(url)
-
     def data(self):
         print('This is the recent news:')
         data = self.url
@@ -42,6 +38,3 @@ class Conferences(Dashboard):
         print('This is the recent radiology conferences:')
         data = self.url
         print(data)
-
-
-#mengambil_data =
