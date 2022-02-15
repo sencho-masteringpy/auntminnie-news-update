@@ -20,8 +20,7 @@ class Dashboard:
     def test(self):
         try:
             if self.request.status_code == 200:
-                soup = BeautifulSoup(self.request.text, 'html.parser')
-                print(f"{soup.find('title').string} is accsesable")
+                print("link is accsesable")
         except Exception:
             print("Can't accses web")
 
@@ -49,9 +48,5 @@ class Conferences(Dashboard):
 
         soup = BeautifulSoup(self.request.text, 'html.parser')
         con = soup.find('div', attrs={'class': 'supBoxLoopCtrl'})
-        con = con.findChildren('a')
         for i in con:
             print(i.text)
-
-
-link = 'https://www.auntminnie.com/'
